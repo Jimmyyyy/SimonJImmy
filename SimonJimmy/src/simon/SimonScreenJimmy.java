@@ -120,45 +120,54 @@ public class SimonScreenJimmy extends ClickableScreen implements Runnable {
 	}
 
 	private void addButtons() {
-		int numberOfButtons = 3;
-		Color[] color = { Color.blue, Color.red, Color.yellow };
-		for (int i = 0; i < numberOfButtons; i++) {
-			final ButtonInterfaceJimmy b = getAButton();
-			b.setColor(color[i]);
-			b.setX(100);
-			b.setY(130);
+		int numberOfButtons = 6;
+		Color[] colors = {Color.yellow, Color.blue, Color.pink, Color.green, Color.red, Color.orange};
+		bInterface = new ButtonInterfaceSimon[numberOfButtons];
+		for(int i = 0; i < numberOfButtons; i++ ){			
+			bInterface[i] = getAButton();
+			bInterface[i].setColor(colors[i]);
+			if(i<=2)bInterface[i].setX(100);
+			else bInterface[i].setX(300);//Math.cos(i*2*Math.PI/(numberOfButtons))));
+			if(i<=2)bInterface[i].setY(150 + (int)(60*i));
+			else bInterface[i].setY(500 - (int)(60*i));// - (int)(100*Math.sin(i*2*Math.PI/(numberOfButtons))));
+			final ButtonInterfaceSimon b = bInterface[i];
+			b.dim();
 			b.setAction(new Action() {
-				public void act() {
-					if (acceptingInput) {
-						Thread blink = new Thread(new Runnable() {
-							public void run() {
-								b.highlight();
-								try {
-									Thread.sleep(800);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								b.dim();
-							}
 
-						});
-						blink.start();
-						if (b == sequence.get(sequenceIndex).getButton()) {
+				public void act() {
+					if(acceptingInput){
+					Thread blink = new Thread(new Runnable() {
+
+						public void run() {
+							b.highlight();
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							b.dim();
+
+						}
+					});
+					blink.start();
+
+					
+						if(b==mInterface.get(sequenceIndex).getButton()){
 							sequenceIndex++;
-						} else {
-							ProgressInterfaceJimmy.gameOver();
+						}else{
+							pInterface.gameOver();
+							return;
 						}
-						if (sequenceIndex == sequence.size()) {
-							Thread nextRound = new Thread(SimonScreenJimmy.this);
-							nextRound.start();
-						}
+					}
+					if(mInterface.size()==sequenceIndex){
+						Thread nextRound = new Thread(SimonScreenSimon.this);
+						nextRound.start();
 					}
 				}
 
 			});
 			viewObjects.add(b);
 		}
-
 	}
 
 	private ButtonInterfaceJimmy getAButton() {
