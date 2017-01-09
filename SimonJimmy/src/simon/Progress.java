@@ -1,4 +1,4 @@
-package simonJaviyFinal;
+package simon;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -7,7 +7,7 @@ import java.awt.RenderingHints;
 
 import guiPractice.components.Component;
 
-public class Progress extends Component implements ProgressInterfaceJaviy {
+public class Progress extends Component implements ProgressInterfaceJimmy {
 
 	private static final int WIDTH = 120;
 	private static final int HEIGHT = 50;

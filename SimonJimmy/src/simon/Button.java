@@ -91,7 +91,7 @@ public class Button extends Component implements ButtonInterfaceJimmy {
 	}
 
 	@Override
-	public ButtonInterfaceSimon getAButton() {
+	public ButtonInterfaceJimmy getAButton() {
 		return null;
 	}
 	

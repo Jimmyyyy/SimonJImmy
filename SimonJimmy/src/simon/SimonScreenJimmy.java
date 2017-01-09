@@ -68,7 +68,14 @@ public class SimonScreenJimmy extends ClickableScreen implements Runnable {
 	}
 
 	private void changeText(String string) {
-		// TODO Auto-generated method stub
+		try {
+			label.setText(string);
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		
+			e.printStackTrace();
+		}
+	}
 		
 	}
 
@@ -108,11 +115,8 @@ public class SimonScreenJimmy extends ClickableScreen implements Runnable {
 	}
 
 	private ProgressInterfaceJimmy getProgress() {
-		/**
-		 * Placeholder until partner finishes implementation of
-		 * ProgressInterface
-		 */
-		return null;
+		return new Progress();
+
 	}
 
 	private void addButtons() {
@@ -158,8 +162,11 @@ public class SimonScreenJimmy extends ClickableScreen implements Runnable {
 	}
 
 	private ButtonInterfaceJimmy getAButton() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ButtonSimon();
+	}
+
+	public void gameOver() {
+		progress.gameOver();
 	}
 
 }
